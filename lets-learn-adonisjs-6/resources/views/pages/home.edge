@@ -10,12 +10,24 @@
 </head>
 
 <body>
-  <nav>
-    <a href="{{ route('home') }}" class="href">Home</a>
-    <a href="{{ route('movies.show', { slug: 'my-awesome-movie'})  }}" class="href">My awesome movie</a>
-    <a href="{{ route('movies.show', { slug: 'another-movie'})  }}" class="href">Another movie</a>
-  </nav>
-  <h1> It Works! </h1>
+  <div class="max-w-3xl mx-auto mt-6">
+    <nav>
+      <a href="{{ route('home') }}" class="href">Home</a>
+      <a href="{{ route('movies.show', { slug: 'my-awesome-movie'})  }}" class="href">My awesome movie</a>
+      <a href="{{ route('movies.show', { slug: 'another-movie'})  }}" class="href">Another movie</a>
+    </nav>
+    <h1> It Works! </h1>
+
+    <ul>
+      @each(movie in movies)
+      <li>
+        <a href="{{ route('movies.show', { slug: movie.slug })}}">
+          {{ movie.title }}
+        </a>
+      </li>
+      @end
+    </ul>
+  </div>
 </body>
 
 </html>
