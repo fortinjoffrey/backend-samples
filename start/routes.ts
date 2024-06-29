@@ -7,7 +7,7 @@
 |
 */
 
-import RedisController from '#controllers/redis_controller'
+const RedisController = () => import('#controllers/redis_controller')
 import router from '@adonisjs/core/services/router'
 
 const MoviesController = () => import('#controllers/movies_controller')
