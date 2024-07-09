@@ -3,14 +3,12 @@ import type { HttpContext } from '@adonisjs/core/http'
 
 export default class PostsController {
   async store({ request }: HttpContext) {
-    const data = request.all()
-    const payload = await createPostValidator.validate(data)
+    const payload = await request.validateUsing(createPostValidator)
     return payload
   }
 
   async update({ request }: HttpContext) {
-    const data = request.all()
-    const payload = await updatePostValidator.validate(data)
+    const payload = await request.validateUsing(updatePostValidator)
     return payload
   }
 
