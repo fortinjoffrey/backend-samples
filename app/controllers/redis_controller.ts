@@ -1,5 +1,3 @@
-// import type { HttpContext } from '@adonisjs/core/http'
-
 import cache from '#services/cache_service'
 import { HttpContext } from '@adonisjs/core/http'
 

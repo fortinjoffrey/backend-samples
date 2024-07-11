@@ -1,17 +1,8 @@
-<!DOCTYPE html>
-<html>
+@layout()
+  @slot('meta')
+    <meta name="description" content="Our awesome movie list">
+  @endslot
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title> AdonisJS - A fully featured web framework for Node.js </title>
-
-  @vite(['resources/css/app.css', 'resources/js/app.js'])
-</head>
-
-<body>
-  <div class="max-w-3xl mx-auto mt-6">
-    @include('partials/nav')
     <h1> It Works! </h1>
 
     <div class="flex flex-wrap -mx-6">
@@ -29,6 +20,4 @@
     @end
 
   </div>
-</body>
-
-</html>
+@end

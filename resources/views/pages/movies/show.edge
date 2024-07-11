@@ -1,26 +1,14 @@
-<!DOCTYPE html>
-<html>
+@layout( { title: movie.title })
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title> AdonisJS - A fully featured web framework for Node.js </title>
+  @slot('meta')
+    <meta name="description" content="{{ movie.summary }}">
+  @endslot
 
-  @vite(['resources/css/app.css', 'resources/js/app.js'])
-</head>
+  <h1>{{ movie.title }}</h1>
 
-<body>
-  <div class="max-w-3xl mx-auto mt-6">
-    @include('partials/nav')
-
-    <h1>{{ movie.title }}</h1>
-
-    @if(movie.abstract)
-    {{{ movie.abstract }}}
-    @else
-    <p>No abstract available</p>
-    @end
-  </div>
-</body>
-
-</html>
+  @if(movie.abstract)
+  {{{ movie.abstract }}}
+  @else
+  <p>No abstract available</p>
+  @end
+@end
