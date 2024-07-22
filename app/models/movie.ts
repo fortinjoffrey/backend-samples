@@ -1,11 +1,18 @@
-// import cache from '#services/cache_service'
-// import MovieService from '#services/movie_service'
 import { BaseModel, column } from '@adonisjs/lucid/orm'
-// import { toHtml } from '@dimerapp/markdown/utils'
+import { DateTime } from 'luxon'
 
 export default class Movie extends BaseModel {
   @column({ isPrimary: true })
   declare id: number
+
+  @column()
+  declare statusId: number
+
+  @column()
+  declare writerId: number
+
+  @column()
+  declare directorId: number
 
   @column()
   declare title: string
@@ -19,6 +26,14 @@ export default class Movie extends BaseModel {
   @column()
   declare abstract: string
 
+  @column()
+  declare posterUrl: string
+
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime
+
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime
   // static async all() {
   //   const slugs = await MovieService.getSlugs()
   //   const movies: Movie[] = []
