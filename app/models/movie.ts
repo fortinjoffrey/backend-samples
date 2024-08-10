@@ -47,6 +47,15 @@ export default class Movie extends BaseModel {
         .where('releasedAt', '<=', DateTime.now().toSQL())
     )
   })
+
+  static notReleased = scope((query) => {
+    query.where((group) =>
+      group
+        .whereNot('statusId', MovieStatuses.RELEASED)
+        .orWhereNull('releasedAt')
+        .orWhere('releasedAt', '>', DateTime.now().toSQL())
+    )
+  })
   /*
   SELECT * FROM movies WHERE
       (statusId = 5
