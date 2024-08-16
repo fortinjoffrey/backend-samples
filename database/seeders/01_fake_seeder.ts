@@ -12,8 +12,8 @@ export default class extends BaseSeeder {
 
   async run() {
     await CineastFactory.createMany(10)
-    await UserFactory.createMany(5)
-    await ProfileFactory.createMany(2)
+    await UserFactory.with('profile').createMany(5)
+    // await ProfileFactory.createMany(2)
     await this.#createMovies()
   }
 
