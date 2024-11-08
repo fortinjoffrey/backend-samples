@@ -1,0 +1,45 @@
+{
+  "$ref": "#/definitions/CreatePersonRequest",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "CreatePersonRequest": {
+      "additionalProperties": false,
+      "properties": {
+        "age": {
+          "type": "number"
+        },
+        "car": {
+          "additionalProperties": false,
+          "properties": {
+            "dateOfManufacturing": {
+              "format": "date-time",
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "name",
+            "dateOfManufacturing"
+          ],
+          "type": "object"
+        },
+        "dateOfBirth": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "age",
+        "car",
+        "dateOfBirth",
+        "name"
+      ],
+      "type": "object"
+    }
+  }
+}

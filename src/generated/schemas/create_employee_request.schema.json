@@ -1,0 +1,26 @@
+{
+  "$ref": "#/definitions/CreateEmployeeRequest",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "CreateEmployeeRequest": {
+      "additionalProperties": false,
+      "properties": {
+        "age": {
+          "type": "number"
+        },
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "age",
+        "id",
+        "name"
+      ],
+      "type": "object"
+    }
+  }
+}

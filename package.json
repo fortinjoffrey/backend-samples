@@ -1,0 +1,31 @@
+{
+  "name": "my-express-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node dist/index.js",
+    "build": "tsc",
+    "dev": "nodemon --exec ts-node src/index.ts",
+    "generate-schemas": "./scripts/generate-json-schemas.sh"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ajv-formats": "^3.0.1",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.14.1",
+    "express": "^5.0.1",
+    "express-json-validator-middleware": "^3.0.1"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.9.0",
+    "nodemon": "^3.1.7",
+    "ts-json-schema-generator": "^2.3.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.6.3"
+  }
+}
