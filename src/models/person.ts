@@ -1,13 +1,14 @@
-import {WithId} from './with_id';
+import {z} from 'zod';
 
-export interface Person extends WithId {
-  name: string;
-  age: number;
-  /** @format date-time */
-  dateOfBirth: string;
-  car: {
-    name: string;
-    /** @format date-time */
-    dateOfManufacturing: string;
-  };
-}
+export const PersonSchema = z.object({
+  id: z.string(),
+  name: z.string(),
+  age: z.coerce.number().min(0),
+  dateOfBirth: z.string().datetime(),
+  car: z.object({
+    name: z.string(),
+    dateOfManufacturing: z.string().datetime(),
+  }),
+});
+
+export type Person = z.infer<typeof PersonSchema>;
