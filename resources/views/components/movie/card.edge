@@ -2,15 +2,41 @@
   class="{{ html.classNames(['rounded-lg overflow-hidden border border-slate-200/60 bg-white text-slate-700 shadow-sm', ($props.class || '')])}}"
   {{ $props.except(['movie', 'class' ]).toAttrs() }}>
   <div class="relative">
-    <img src="https://picsum.photos/450/200?v={{ movie.slug }}" class="w-full h-auto" />
+    <img src="{{ movie.posterUrl }}" class="w-full h-auto" />
   </div>
-  <div class="p-7">
-    <h2 class="mb-2 text-lg font-bold leading-none tracking-tight">
+  <div class="p-4">
+    <h3 class="font-bold leading-none tracking-tight">
       {{ movie.title }}
-    </h2>
-    <p class="mb-5 text-slate-500">
+    </h3>
+
+    @if (showWriterDirector)
+    <dl class="text-xs py-4">
+      <div class="flex">
+        <dt class="w-16">Writer:</dt>
+        <dd>
+          <a href="{{ route('writers.show', { id: movie.writer.id })}}">
+            {{ movie.writer.fullName }}
+          </a>
+        </dd>
+      </div>
+      <div class="flex">
+        <dt class="w-16">Director:</dt>
+        <dd>
+          <a href="{{ route('directors.show', { id: movie.director.id })}}">
+            {{ movie.director.fullName }}
+          </a>
+        </dd>
+      </div>
+    </dl>
+    @else
+    <p class="py-4 text-xs text-slate-500">
       {{ movie.summary }}
     </p>
+
+    @end
+
+
+
     @button({ href: route('movies.show', { slug: movie.slug })})
     View Movie
     @end
