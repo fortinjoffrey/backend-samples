@@ -2,16 +2,15 @@ import express from 'express';
 import {Request, Response} from 'express';
 import {Person, PersonSchema} from '../models/person';
 import {z} from 'zod';
-import {CreatePersonRequestSchema, UpdatePersonRequest, UpdatePersonRequestSchema} from '../requests/persons_request';
+import {CreatePersonRequestSchema, UpdatePersonRequestSchema} from '../requests/persons_request';
 import {IdSchema} from '../models/id';
+import {PersonNotFoundError} from '../errors';
 
 export const router = express.Router();
 
 class PersonController {
   public async createPerson(req: Request, res: Response): Promise<void> {
     const validatedPerson = CreatePersonRequestSchema.parse(req.body);
-
-    console.log('Validated person = ', validatedPerson);
 
     const newPerson = await new PersonService().createPerson(validatedPerson);
 
@@ -23,9 +22,8 @@ class PersonController {
 
   public async updatePerson(req: Request, res: Response): Promise<void> {
     const validatedPerson = UpdatePersonRequestSchema.parse(req.body);
-    const personId = IdSchema.parse(req.params.id);
 
-    const updatedPerson = await new PersonService().updatePerson(personId, validatedPerson);
+    const updatedPerson = await new PersonService().updatePerson(req.params.id, validatedPerson);
 
     res.status(200).json({
       message: 'Person updated successfully',
@@ -45,42 +43,78 @@ class PersonController {
       data: person,
     });
   }
+
+  public async deletePerson(req: Request, res: Response): Promise<void> {
+    const personId = req.params.id;
+    await new PersonService().deletePerson(personId);
+    res.status(200).json({
+      message: 'Person deleted successfully',
+    });
+  }
 }
 
-const mockPersonsJson = [
-  {
-    id: '1',
-    name: 'John Doe',
-    age: 30,
-    dateOfBirth: '1993-05-15T00:00:00Z',
-    car: {
-      name: 'Toyota',
-      dateOfManufacturing: '2010-10-10T00:00:00Z',
+const mockPersonsCollection: Map<string, {[field: string]: any}> = new Map([
+  [
+    '1',
+    {
+      name: 'John Doe',
+      age: 30,
+      dateOfBirth: '1993-05-15T00:00:00Z',
+      car: [
+        {
+          name: 'Toyota',
+          dateOfManufacturing: '2010-10-10T00:00:00Z',
+        },
+      ],
+      gender: 'MALE',
     },
-  },
-];
+  ],
+  [
+    '2',
+    {
+      name: 'Jane Doe',
+      age: 28,
+      dateOfBirth: '1995-04-12T00:00:00Z',
+      car: [
+        {
+          name: 'HondaFF',
+          dateOfManufacturing: '2015-06-20T00:00:00Z',
+        },
+      ],
+      gender: 'FEMALE',
+    },
+  ],
+]);
 
 class PersonService {
   async createPerson(person: Omit<Person, 'id'>): Promise<Person> {
-    const personWithId = {...person, id: (mockPersonsJson.length + 1).toString()};
+    const personWithId = {...person, id: (mockPersonsCollection.size + 1).toString()};
 
     await new Promise((resolve) => setTimeout(resolve, 1000));
 
-    mockPersonsJson.push(personWithId);
+    mockPersonsCollection.set(personWithId.id, personWithId);
     return personWithId;
   }
 
-  async updatePerson(id: string, person: UpdatePersonRequest): Promise<Person> {
-    const personData = mockPersonsJson.find((person) => person.id === id);
+  async updatePerson(id: string, personToUpdate: Omit<Partial<Person>, 'id'>): Promise<Person> {
+    const personData = mockPersonsCollection.get(id);
 
     if (!personData) {
-      throw new Error('Person not found');
+      throw new PersonNotFoundError('Person not found');
     }
 
-    const updatedPerson = {...personData, ...person};
+    const currentPerson = PersonSchema.parse({...personData, id});
 
-    const index = mockPersonsJson.findIndex((person) => person.id === id);
-    mockPersonsJson[index] = updatedPerson;
+    const updatedPerson = {
+      ...currentPerson,
+      ...personToUpdate,
+    };
+
+    if (mockPersonsCollection.has(id)) {
+      mockPersonsCollection.set(id, updatedPerson);
+    } else {
+      throw new PersonNotFoundError('Person not found');
+    }
 
     await new Promise((resolve) => setTimeout(resolve, 1000));
 
@@ -88,19 +122,24 @@ class PersonService {
   }
 
   async getPerson(id: string): Promise<Person | null> {
-    const personData = mockPersonsJson.find((person) => person.id === id);
+    const personData = mockPersonsCollection.get(id);
 
     if (!personData) {
       return null;
     }
 
-    try {
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      return PersonSchema.parse(personData);
-    } catch (error) {
-      console.error('Validation error on fetched data:', error);
-      throw new Error('Invalid person data');
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    return PersonSchema.parse({...personData, id});
+  }
+
+  async deletePerson(id: string): Promise<void> {
+    if (mockPersonsCollection.has(id)) {
+      mockPersonsCollection.delete(id);
+    } else {
+      throw new PersonNotFoundError('Person not found');
     }
+
+    await new Promise((resolve) => setTimeout(resolve, 1000));
   }
 }
 
@@ -112,8 +151,4 @@ router
   .route('/:id')
   .get(personController.getPerson)
   .put(personController.updatePerson)
-  .delete((req: Request, res: Response) => {
-    res.status(200).json({
-      message: 'Person deleted successfully',
-    });
-  });
+  .delete(personController.deletePerson);

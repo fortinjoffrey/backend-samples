@@ -5,6 +5,3 @@ export const CreatePersonRequestSchema = PersonSchema.omit({id: true});
 export const GetPersonRequestSchema = PersonSchema;
 export const UpdatePersonRequestSchema = PersonSchema.partial().omit({id: true});
 export type UpdatePersonRequest = z.infer<typeof UpdatePersonRequestSchema>;
-// export const UpdatePersonRequestSchema = PersonSchema.partial().extend({
-//   id: z.string(),
-// });

@@ -1,6 +1,7 @@
 import express, {NextFunction, Request, Response} from 'express';
 import {router as personRouter} from './routes/persons_router';
 import {z} from 'zod';
+import {PersonNotFoundError} from './errors';
 
 const app = express();
 const port = 3000;
@@ -15,12 +16,19 @@ export const errorHandler = (err: any, req: Request, res: Response, next: NextFu
       message: 'Validation error',
       errors: err.errors,
     });
-  } else {
-    res.status(500).json({
-      message: 'Internal server error',
-      error: err.message,
-    });
+    return;
   }
+  if (err instanceof PersonNotFoundError) {
+    res.status(404).json({
+      message: err.message,
+    });
+    return;
+  }
+
+  res.status(500).json({
+    message: 'Internal server error',
+    error: err.message,
+  });
 };
 app.use(errorHandler);
 
