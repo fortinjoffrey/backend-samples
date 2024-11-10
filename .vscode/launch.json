@@ -4,19 +4,11 @@
     {
       "type": "node",
       "request": "launch",
-      "name": "Launch Server",
-      "runtimeExecutable": "nodemon",
-      "program": "${workspaceFolder}/src/index.ts",
-      "restart": true,
-      "protocol": "inspector",
-      "args": ["--inspect"],
-      "cwd": "${workspaceFolder}",
-      "env": {
-        "NODE_ENV": "development"
-      },
-      "console": "integratedTerminal",
-      "internalConsoleOptions": "neverOpen",
-      "skipFiles": ["<node_internals>/**"]
+      "name": "npm run dev",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev"],
+      // "console": "integratedTerminal",
+      "internalConsoleOptions": "openOnFirstSessionStart"
     }
   ]
 }

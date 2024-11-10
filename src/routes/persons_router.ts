@@ -2,7 +2,7 @@ import express from 'express';
 import {Request, Response} from 'express';
 import {Person, PersonSchema} from '../models/person';
 import {z} from 'zod';
-import {CreatePersonRequestSchema, UpdatePersonRequestSchema} from '../requests/persons_request';
+import {CreatePersonRequestSchema, UpdatePersonRequestSchema} from '../requests/persons_requests';
 import {IdSchema} from '../models/id';
 import {PersonNotFoundError} from '../errors';
 
@@ -23,7 +23,9 @@ class PersonController {
   public async updatePerson(req: Request, res: Response): Promise<void> {
     const validatedPerson = UpdatePersonRequestSchema.parse(req.body);
 
-    const updatedPerson = await new PersonService().updatePerson(req.params.id, validatedPerson);
+    const {id, ...personWithoutId} = validatedPerson;
+
+    const updatedPerson = await new PersonService().updatePerson(req.params.id, personWithoutId);
 
     res.status(200).json({
       message: 'Person updated successfully',
@@ -32,12 +34,9 @@ class PersonController {
   }
 
   public async getPerson(req: Request, res: Response): Promise<void> {
-    const personId = req.params.id;
+    const personId = IdSchema.parse(req.params.id);
     const person = await new PersonService().getPerson(personId);
-    if (!person) {
-      res.status(404).json({message: 'Person not found'});
-      return;
-    }
+
     res.status(200).json({
       message: 'Person retrieved successfully',
       data: person,
@@ -100,7 +99,7 @@ class PersonService {
     const personData = mockPersonsCollection.get(id);
 
     if (!personData) {
-      throw new PersonNotFoundError('Person not found');
+      throw new PersonNotFoundError();
     }
 
     const currentPerson = PersonSchema.parse({...personData, id});
@@ -113,7 +112,7 @@ class PersonService {
     if (mockPersonsCollection.has(id)) {
       mockPersonsCollection.set(id, updatedPerson);
     } else {
-      throw new PersonNotFoundError('Person not found');
+      throw new PersonNotFoundError();
     }
 
     await new Promise((resolve) => setTimeout(resolve, 1000));
@@ -121,11 +120,11 @@ class PersonService {
     return updatedPerson;
   }
 
-  async getPerson(id: string): Promise<Person | null> {
+  async getPerson(id: string): Promise<Person> {
     const personData = mockPersonsCollection.get(id);
 
     if (!personData) {
-      return null;
+      throw new PersonNotFoundError();
     }
 
     await new Promise((resolve) => setTimeout(resolve, 1000));
@@ -136,7 +135,7 @@ class PersonService {
     if (mockPersonsCollection.has(id)) {
       mockPersonsCollection.delete(id);
     } else {
-      throw new PersonNotFoundError('Person not found');
+      throw new PersonNotFoundError();
     }
 
     await new Promise((resolve) => setTimeout(resolve, 1000));
@@ -150,5 +149,5 @@ router.post('/', personController.createPerson);
 router
   .route('/:id')
   .get(personController.getPerson)
-  .put(personController.updatePerson)
+  .patch(personController.updatePerson)
   .delete(personController.deletePerson);
