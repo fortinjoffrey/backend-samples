@@ -1,0 +1,189 @@
+openapi: 3.0.0
+info:
+  title: Person API
+  version: 1.0.0
+  description: API for managing persons
+
+servers:
+  - url: http://localhost:3000
+    description: Local server
+
+paths:
+  /persons:
+    post:
+      summary: Create a new person
+      tags:
+        - Persons
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreatePersonRequest'
+      responses:
+        201:
+          description: Person created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Person'
+        400:
+          description: Invalid input
+
+  /persons/{id}:
+    get:
+      summary: Get a person by ID
+      tags:
+        - Persons
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Person retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Person'
+        404:
+          description: Person not found
+
+    patch:
+      summary: Update a person by ID
+      tags:
+        - Persons
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdatePersonRequest'
+      responses:
+        200:
+          description: Person updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Person'
+        404:
+          description: Person not found
+        400:
+          description: Invalid input
+
+    delete:
+      summary: Delete a person by ID
+      tags:
+        - Persons
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Person deleted successfully
+        404:
+          description: Person not found
+
+components:
+  schemas:
+    Person:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+          default: 'John Doe'
+        age:
+          type: integer
+          minimum: 0
+          default: 18
+        dateOfBirth:
+          type: string
+          format: date-time
+          default: '2000-01-01T00:00:00Z'
+        car:
+          type: array
+          items:
+            $ref: '#/components/schemas/Car'
+          default:
+            - name: 'Gallardo'
+              dateOfManufacturing: '2003-04-17T08:00:00Z'
+        gender:
+          $ref: '#/components/schemas/Gender'
+        pseudo:
+          type: string
+          nullable: true
+      required:
+        - id
+        - name
+        - age
+        - dateOfBirth
+        - car
+        - gender
+
+    CreatePersonRequest:
+      allOf:
+        - $ref: '#/components/schemas/Person'
+      properties:
+        id:
+          type: string
+          nullable: true
+          readOnly: true
+
+    UpdatePersonRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          default: 'Red John'
+        age:
+          type: integer
+          minimum: 0
+          default: 22
+        dateOfBirth:
+          type: string
+          format: date-time
+          default: '1998-01-01T00:00:00Z'
+        car:
+          type: array
+          items:
+            $ref: '#/components/schemas/Car'
+        gender:
+          $ref: '#/components/schemas/Gender'
+        pseudo:
+          type: string
+          nullable: true
+          default: 'RJ'
+
+    Car:
+      type: object
+      properties:
+        name:
+          type: string
+          default: 'Mustang'
+        dateOfManufacturing:
+          type: string
+          format: date-time
+          default: '1964-04-17T08:00:00Z'
+      required:
+        - name
+        - dateOfManufacturing
+
+    Gender:
+      type: string
+      enum:
+        - MALE
+        - FEMALE
+      default: 'MALE'

@@ -1,10 +1,13 @@
-import express, {NextFunction, Request, Response} from 'express';
+import express, {NextFunction, Request, Response, Express} from 'express';
 import {router as personRouter} from './routes/persons_router';
 import {z} from 'zod';
 import {PersonNotFoundError} from './errors';
+import {setupSwagger} from './swagger';
 
 const app = express();
 const port = 3000;
+
+setupSwagger(app);
 
 app.use(express.json());
 

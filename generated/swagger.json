@@ -1,0 +1,541 @@
+{
+    "item": [
+        {
+            "name": "persons",
+            "description": "",
+            "item": [
+                {
+                    "id": "6acf8c55-05b4-4759-83e0-7a36e7d614ad",
+                    "name": "Create a new person",
+                    "request": {
+                        "name": "Create a new person",
+                        "description": {},
+                        "url": {
+                            "path": [
+                                "persons"
+                            ],
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "query": [],
+                            "variable": []
+                        },
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            }
+                        ],
+                        "method": "POST",
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"John Doe\",\n  \"age\": 18,\n  \"dateOfBirth\": \"2000-01-01T00:00:00Z\",\n  \"car\": [\n    {\n      \"name\": \"Gallardo\",\n      \"dateOfManufacturing\": \"2003-04-17T08:00:00Z\"\n    }\n  ],\n  \"gender\": \"MALE\",\n  \"pseudo\": \"<string>\"\n}",
+                            "options": {
+                                "raw": {
+                                    "headerFamily": "json",
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "auth": null
+                    },
+                    "response": [
+                        {
+                            "id": "87d63de7-41d7-49ee-be6a-d692f7364ea3",
+                            "name": "Person created successfully",
+                            "originalRequest": {
+                                "url": {
+                                    "path": [
+                                        "persons"
+                                    ],
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "query": [],
+                                    "variable": []
+                                },
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "method": "POST",
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"John Doe\",\n  \"age\": 18,\n  \"dateOfBirth\": \"2000-01-01T00:00:00Z\",\n  \"car\": [\n    {\n      \"name\": \"Gallardo\",\n      \"dateOfManufacturing\": \"2003-04-17T08:00:00Z\"\n    }\n  ],\n  \"gender\": \"MALE\",\n  \"pseudo\": \"<string>\"\n}",
+                                    "options": {
+                                        "raw": {
+                                            "headerFamily": "json",
+                                            "language": "json"
+                                        }
+                                    }
+                                }
+                            },
+                            "status": "Created",
+                            "code": 201,
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                }
+                            ],
+                            "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"John Doe\",\n  \"age\": 18,\n  \"dateOfBirth\": \"2000-01-01T00:00:00Z\",\n  \"car\": [\n    {\n      \"name\": \"Gallardo\",\n      \"dateOfManufacturing\": \"2003-04-17T08:00:00Z\"\n    }\n  ],\n  \"gender\": \"MALE\",\n  \"pseudo\": \"<string>\"\n}",
+                            "cookie": [],
+                            "_postman_previewlanguage": "json"
+                        },
+                        {
+                            "id": "063b48ff-1c1b-4c71-9398-c1b998f9081d",
+                            "name": "Invalid input",
+                            "originalRequest": {
+                                "url": {
+                                    "path": [
+                                        "persons"
+                                    ],
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "query": [],
+                                    "variable": []
+                                },
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "method": "POST",
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"John Doe\",\n  \"age\": 18,\n  \"dateOfBirth\": \"2000-01-01T00:00:00Z\",\n  \"car\": [\n    {\n      \"name\": \"Gallardo\",\n      \"dateOfManufacturing\": \"2003-04-17T08:00:00Z\"\n    }\n  ],\n  \"gender\": \"MALE\",\n  \"pseudo\": \"<string>\"\n}",
+                                    "options": {
+                                        "raw": {
+                                            "headerFamily": "json",
+                                            "language": "json"
+                                        }
+                                    }
+                                }
+                            },
+                            "status": "Bad Request",
+                            "code": 400,
+                            "header": [],
+                            "cookie": [],
+                            "_postman_previewlanguage": "text"
+                        }
+                    ],
+                    "event": [],
+                    "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                    }
+                },
+                {
+                    "name": "{id}",
+                    "description": "",
+                    "item": [
+                        {
+                            "id": "892b546b-c3fa-4bf4-a9fd-cea091576439",
+                            "name": "Get a person by ID",
+                            "request": {
+                                "name": "Get a person by ID",
+                                "description": {},
+                                "url": {
+                                    "path": [
+                                        "persons",
+                                        ":id"
+                                    ],
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "query": [],
+                                    "variable": [
+                                        {
+                                            "type": "any",
+                                            "value": "<string>",
+                                            "key": "id",
+                                            "disabled": false,
+                                            "description": {
+                                                "content": "(Required) ",
+                                                "type": "text/plain"
+                                            }
+                                        }
+                                    ]
+                                },
+                                "header": [
+                                    {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "method": "GET",
+                                "body": {},
+                                "auth": null
+                            },
+                            "response": [
+                                {
+                                    "id": "41831c15-8c34-419f-824c-91a03c2cd870",
+                                    "name": "Person retrieved successfully",
+                                    "originalRequest": {
+                                        "url": {
+                                            "path": [
+                                                "persons",
+                                                ":id"
+                                            ],
+                                            "host": [
+                                                "{{baseUrl}}"
+                                            ],
+                                            "query": [],
+                                            "variable": []
+                                        },
+                                        "header": [
+                                            {
+                                                "key": "Accept",
+                                                "value": "application/json"
+                                            }
+                                        ],
+                                        "method": "GET",
+                                        "body": {}
+                                    },
+                                    "status": "OK",
+                                    "code": 200,
+                                    "header": [
+                                        {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                        }
+                                    ],
+                                    "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"John Doe\",\n  \"age\": 18,\n  \"dateOfBirth\": \"2000-01-01T00:00:00Z\",\n  \"car\": [\n    {\n      \"name\": \"Gallardo\",\n      \"dateOfManufacturing\": \"2003-04-17T08:00:00Z\"\n    }\n  ],\n  \"gender\": \"MALE\",\n  \"pseudo\": \"<string>\"\n}",
+                                    "cookie": [],
+                                    "_postman_previewlanguage": "json"
+                                },
+                                {
+                                    "id": "9b72727e-c9b1-4583-9ad8-742e2ee09c30",
+                                    "name": "Person not found",
+                                    "originalRequest": {
+                                        "url": {
+                                            "path": [
+                                                "persons",
+                                                ":id"
+                                            ],
+                                            "host": [
+                                                "{{baseUrl}}"
+                                            ],
+                                            "query": [],
+                                            "variable": []
+                                        },
+                                        "method": "GET",
+                                        "body": {}
+                                    },
+                                    "status": "Not Found",
+                                    "code": 404,
+                                    "header": [],
+                                    "cookie": [],
+                                    "_postman_previewlanguage": "text"
+                                }
+                            ],
+                            "event": [],
+                            "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                            }
+                        },
+                        {
+                            "id": "ff2c53e6-6af8-46b0-89d4-f204a38b4c84",
+                            "name": "Update a person by ID",
+                            "request": {
+                                "name": "Update a person by ID",
+                                "description": {},
+                                "url": {
+                                    "path": [
+                                        "persons",
+                                        ":id"
+                                    ],
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "query": [],
+                                    "variable": [
+                                        {
+                                            "type": "any",
+                                            "value": "<string>",
+                                            "key": "id",
+                                            "disabled": false,
+                                            "description": {
+                                                "content": "(Required) ",
+                                                "type": "text/plain"
+                                            }
+                                        }
+                                    ]
+                                },
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "method": "PATCH",
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n  \"name\": \"Red John\",\n  \"age\": 22,\n  \"dateOfBirth\": \"1998-01-01T00:00:00Z\",\n  \"car\": [\n    {\n      \"name\": \"Mustang\",\n      \"dateOfManufacturing\": \"1964-04-17T08:00:00Z\"\n    },\n    {\n      \"name\": \"Mustang\",\n      \"dateOfManufacturing\": \"1964-04-17T08:00:00Z\"\n    }\n  ],\n  \"gender\": \"MALE\",\n  \"pseudo\": \"RJ\"\n}",
+                                    "options": {
+                                        "raw": {
+                                            "headerFamily": "json",
+                                            "language": "json"
+                                        }
+                                    }
+                                },
+                                "auth": null
+                            },
+                            "response": [
+                                {
+                                    "id": "f81d9569-4970-4aac-8289-81ea89691085",
+                                    "name": "Person updated successfully",
+                                    "originalRequest": {
+                                        "url": {
+                                            "path": [
+                                                "persons",
+                                                ":id"
+                                            ],
+                                            "host": [
+                                                "{{baseUrl}}"
+                                            ],
+                                            "query": [],
+                                            "variable": []
+                                        },
+                                        "header": [
+                                            {
+                                                "key": "Content-Type",
+                                                "value": "application/json"
+                                            },
+                                            {
+                                                "key": "Accept",
+                                                "value": "application/json"
+                                            }
+                                        ],
+                                        "method": "PATCH",
+                                        "body": {
+                                            "mode": "raw",
+                                            "raw": "{\n  \"name\": \"Red John\",\n  \"age\": 22,\n  \"dateOfBirth\": \"1998-01-01T00:00:00Z\",\n  \"car\": [\n    {\n      \"name\": \"Mustang\",\n      \"dateOfManufacturing\": \"1964-04-17T08:00:00Z\"\n    },\n    {\n      \"name\": \"Mustang\",\n      \"dateOfManufacturing\": \"1964-04-17T08:00:00Z\"\n    }\n  ],\n  \"gender\": \"MALE\",\n  \"pseudo\": \"RJ\"\n}",
+                                            "options": {
+                                                "raw": {
+                                                    "headerFamily": "json",
+                                                    "language": "json"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "status": "OK",
+                                    "code": 200,
+                                    "header": [
+                                        {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                        }
+                                    ],
+                                    "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"John Doe\",\n  \"age\": 18,\n  \"dateOfBirth\": \"2000-01-01T00:00:00Z\",\n  \"car\": [\n    {\n      \"name\": \"Gallardo\",\n      \"dateOfManufacturing\": \"2003-04-17T08:00:00Z\"\n    }\n  ],\n  \"gender\": \"MALE\",\n  \"pseudo\": \"<string>\"\n}",
+                                    "cookie": [],
+                                    "_postman_previewlanguage": "json"
+                                },
+                                {
+                                    "id": "df5865a8-6c55-49ac-8648-206d05fed812",
+                                    "name": "Invalid input",
+                                    "originalRequest": {
+                                        "url": {
+                                            "path": [
+                                                "persons",
+                                                ":id"
+                                            ],
+                                            "host": [
+                                                "{{baseUrl}}"
+                                            ],
+                                            "query": [],
+                                            "variable": []
+                                        },
+                                        "header": [
+                                            {
+                                                "key": "Content-Type",
+                                                "value": "application/json"
+                                            }
+                                        ],
+                                        "method": "PATCH",
+                                        "body": {
+                                            "mode": "raw",
+                                            "raw": "{\n  \"name\": \"Red John\",\n  \"age\": 22,\n  \"dateOfBirth\": \"1998-01-01T00:00:00Z\",\n  \"car\": [\n    {\n      \"name\": \"Mustang\",\n      \"dateOfManufacturing\": \"1964-04-17T08:00:00Z\"\n    },\n    {\n      \"name\": \"Mustang\",\n      \"dateOfManufacturing\": \"1964-04-17T08:00:00Z\"\n    }\n  ],\n  \"gender\": \"MALE\",\n  \"pseudo\": \"RJ\"\n}",
+                                            "options": {
+                                                "raw": {
+                                                    "headerFamily": "json",
+                                                    "language": "json"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "status": "Bad Request",
+                                    "code": 400,
+                                    "header": [],
+                                    "cookie": [],
+                                    "_postman_previewlanguage": "text"
+                                },
+                                {
+                                    "id": "f726dd7a-304c-4a03-ba83-7ceba147542b",
+                                    "name": "Person not found",
+                                    "originalRequest": {
+                                        "url": {
+                                            "path": [
+                                                "persons",
+                                                ":id"
+                                            ],
+                                            "host": [
+                                                "{{baseUrl}}"
+                                            ],
+                                            "query": [],
+                                            "variable": []
+                                        },
+                                        "header": [
+                                            {
+                                                "key": "Content-Type",
+                                                "value": "application/json"
+                                            }
+                                        ],
+                                        "method": "PATCH",
+                                        "body": {
+                                            "mode": "raw",
+                                            "raw": "{\n  \"name\": \"Red John\",\n  \"age\": 22,\n  \"dateOfBirth\": \"1998-01-01T00:00:00Z\",\n  \"car\": [\n    {\n      \"name\": \"Mustang\",\n      \"dateOfManufacturing\": \"1964-04-17T08:00:00Z\"\n    },\n    {\n      \"name\": \"Mustang\",\n      \"dateOfManufacturing\": \"1964-04-17T08:00:00Z\"\n    }\n  ],\n  \"gender\": \"MALE\",\n  \"pseudo\": \"RJ\"\n}",
+                                            "options": {
+                                                "raw": {
+                                                    "headerFamily": "json",
+                                                    "language": "json"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "status": "Not Found",
+                                    "code": 404,
+                                    "header": [],
+                                    "cookie": [],
+                                    "_postman_previewlanguage": "text"
+                                }
+                            ],
+                            "event": [],
+                            "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                            }
+                        },
+                        {
+                            "id": "47c7742a-3f7c-4a9d-8b75-c1f2b6e608e5",
+                            "name": "Delete a person by ID",
+                            "request": {
+                                "name": "Delete a person by ID",
+                                "description": {},
+                                "url": {
+                                    "path": [
+                                        "persons",
+                                        ":id"
+                                    ],
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "query": [],
+                                    "variable": [
+                                        {
+                                            "type": "any",
+                                            "value": "<string>",
+                                            "key": "id",
+                                            "disabled": false,
+                                            "description": {
+                                                "content": "(Required) ",
+                                                "type": "text/plain"
+                                            }
+                                        }
+                                    ]
+                                },
+                                "method": "DELETE",
+                                "body": {},
+                                "auth": null
+                            },
+                            "response": [
+                                {
+                                    "id": "8ee5b4db-d6eb-4a9d-8322-9537ab740128",
+                                    "name": "Person deleted successfully",
+                                    "originalRequest": {
+                                        "url": {
+                                            "path": [
+                                                "persons",
+                                                ":id"
+                                            ],
+                                            "host": [
+                                                "{{baseUrl}}"
+                                            ],
+                                            "query": [],
+                                            "variable": []
+                                        },
+                                        "method": "DELETE",
+                                        "body": {}
+                                    },
+                                    "status": "OK",
+                                    "code": 200,
+                                    "header": [],
+                                    "cookie": [],
+                                    "_postman_previewlanguage": "text"
+                                },
+                                {
+                                    "id": "0d7808da-8c07-4e43-9c8a-31ef8a76a414",
+                                    "name": "Person not found",
+                                    "originalRequest": {
+                                        "url": {
+                                            "path": [
+                                                "persons",
+                                                ":id"
+                                            ],
+                                            "host": [
+                                                "{{baseUrl}}"
+                                            ],
+                                            "query": [],
+                                            "variable": []
+                                        },
+                                        "method": "DELETE",
+                                        "body": {}
+                                    },
+                                    "status": "Not Found",
+                                    "code": 404,
+                                    "header": [],
+                                    "cookie": [],
+                                    "_postman_previewlanguage": "text"
+                                }
+                            ],
+                            "event": [],
+                            "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "event": [],
+    "variable": [
+        {
+            "key": "baseUrl",
+            "value": "http://localhost:3000"
+        }
+    ],
+    "info": {
+        "_postman_id": "c05903ec-fb96-4b57-9de0-945d3cf5114d",
+        "name": "Person API",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+        "description": {
+            "content": "API for managing persons",
+            "type": "text/plain"
+        }
+    }
+}
