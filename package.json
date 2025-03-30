@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint .",
     "clean": "pnpm -r exec rm -rf node_modules && rm -rf node_modules && pnpm -r exec rm -rf lib && pnpm -r exec rm -rf dist",
-    "build": "pnpm prettier && pnpm -r build",
+    "build": "pnpm lint && pnpm prettier && pnpm -r build",
     "reinstall": "pnpm clean && pnpm install && pnpm build",
     "dev": "pnpm --parallel -r run dev",
     "prettier": "prettier --write ."
@@ -16,11 +17,16 @@
   "license": "ISC",
   "packageManager": "pnpm@10.7.0",
   "devDependencies": {
+    "@eslint/js": "^9.23.0",
     "@types/express": "^5.0.1",
     "@types/node": "^22.13.14",
+    "eslint": "^9.23.0",
+    "eslint-config-prettier": "^10.1.1",
+    "globals": "^16.0.0",
     "nodemon": "^3.1.9",
     "prettier": "^3.5.3",
-    "typescript": "^5.8.2"
+    "typescript": "^5.8.2",
+    "typescript-eslint": "^8.28.0"
   },
   "dependencies": {
     "express": "^4.21.2",
