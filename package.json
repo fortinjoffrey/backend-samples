@@ -1,0 +1,28 @@
+{
+  "name": "backend-samples",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "clean": "pnpm -r exec rm -rf node_modules && rm -rf node_modules && pnpm -r exec rm -rf lib && pnpm -r exec rm -rf dist",
+    "build": "pnpm -r build",
+    "reinstall": "pnpm clean && pnpm install && pnpm build",
+    "dev": "pnpm --parallel -r run dev"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.7.0",
+  "devDependencies": {
+    "@types/express": "^5.0.1",
+    "@types/node": "^22.13.14",
+    "nodemon": "^3.1.9",
+    "typescript": "^5.8.2"
+  },
+  "dependencies": {
+    "express": "^4.21.2",
+    "firebase-admin": "^13.2.0",
+    "zod": "^3.24.2"
+  }
+}
